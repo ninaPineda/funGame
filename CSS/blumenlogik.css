@@ -14,9 +14,15 @@ body {
 }
 
 .field {
+     transition: opacity 0.3s ease;
+  opacity: 1;
   display: grid;
   grid-template-columns: repeat(5, 50px);
   grid-gap: 10px;
+}
+
+.field.fade-out {
+  opacity: 0;
 }
 
 .cell {
@@ -33,18 +39,46 @@ body {
   opacity: 0.6;
 }
 
-button, #back-btn {
-  padding: 0.5rem 1rem;
-  margin: 1rem;
-  background-color: var(--puce);
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  text-decoration: none;
-}
 
 button:hover, #back-btn:hover {
   background-color: var(--asparagus);
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(237, 227, 220, 0.8); /* leicht transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.overlay-content {
+  background: white;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--asparagus);
+}
+
+.hidden {
+  display: none;
+}
+
+#overlay {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+#overlay.visible {
+  opacity: 1;
+  pointer-events: all;
 }

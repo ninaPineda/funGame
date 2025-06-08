@@ -8,7 +8,9 @@
   <link rel="stylesheet" href="../css/colors.css" />
 </head>
 <body>
-  <h1>🌸 Blumenlogikspiel</h1>
+      <a href="../index.html" class="back-btn" id="back-btn">Zurück</a>
+  <h1>Blumenlogikspiel</h1>
+  <p id="level">Level: 1</p>
   <p id="moves">Züge übrig: 5</p>
 
   <div class="field-container">
@@ -16,9 +18,15 @@
     <div id="play-field" class="field"></div>
   </div>
 
-  <button id="reset-btn">🔁 Neu starten</button>
-  <a href="../index.html" id="back-btn">🔙 Zurück</a>
+  <button id="reset-btn">Neu starten</button>
+
+<div id="overlay" class="hidden">
+  <div class="overlay-content">
+    <p id="overlay-text"></p>
+  </div>
+</div>
 
   <script src="../js/blumenlogik.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </body>
 </html>
