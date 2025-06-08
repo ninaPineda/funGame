@@ -1,0 +1,50 @@
+body {
+  text-align: center;
+  font-family: sans-serif;
+  background-color: var(--linen);
+  color: var(--asparagus);
+  padding: 2rem;
+}
+
+.field-container {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  margin: 2rem 0;
+}
+
+.field {
+  display: grid;
+  grid-template-columns: repeat(5, 50px);
+  grid-gap: 10px;
+}
+
+.cell {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--sage);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cell.inactive {
+  cursor: default;
+  opacity: 0.6;
+}
+
+button, #back-btn {
+  padding: 0.5rem 1rem;
+  margin: 1rem;
+  background-color: var(--puce);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:hover, #back-btn:hover {
+  background-color: var(--asparagus);
+}

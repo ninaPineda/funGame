@@ -1,0 +1,18 @@
+:root {
+  --sage: #BEC37F;
+  --linen: #EDE3DC;
+  --asparagus: #526436;
+  --puce: #8d4955;
+  --pale-dogwood: #ECCECD;
+
+  /* CSS Gradients */
+  --gradient-top: linear-gradient(0deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-right: linear-gradient(90deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-bottom: linear-gradient(180deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-left: linear-gradient(270deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-top-right: linear-gradient(45deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-bottom-right: linear-gradient(135deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-top-left: linear-gradient(225deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-bottom-left: linear-gradient(315deg, var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+  --gradient-radial: radial-gradient(var(--sage), var(--linen), var(--asparagus), var(--puce), var(--pale-dogwood));
+}

@@ -1,0 +1,25 @@
+
+#game-area {
+  width: 80vw;
+  height: 60vh;
+  margin: 2rem auto;
+  border-radius: 1rem;
+  position: relative;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid var(--asparagus);
+  box-shadow: grey;
+  overflow: hidden;
+}
+
+#circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  position: absolute;
+  display: none;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+

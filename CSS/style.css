@@ -1,0 +1,40 @@
+body {
+  font-family: sans-serif;
+  background-color: var(--linen);
+  color: var(--asparagus);
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+}
+
+
+
+h1 {
+  margin-bottom: 2rem;
+  color: var(--asparagus);
+}
+
+
+body {
+  background-image: url("../SRC/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top;
+}
+
+button, a{
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background-color: var(--puce);
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+button:hover, a:hover {
+  transform: scale(1.05);
+  background-color: var(--asparagus);
+}
