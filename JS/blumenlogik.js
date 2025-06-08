@@ -77,34 +77,64 @@ function randomColor() {
 }
 
 function createReferenceField(container, fieldData) {
-    container.style.gridTemplateColumns = `repeat(${SIZE}, 50px)`;
   container.innerHTML = "";
+  container.style.gridTemplateColumns = `repeat(${SIZE}, 50px)`;
+
   for (let row = 0; row < SIZE; row++) {
     fieldData[row] = [];
     for (let col = 0; col < SIZE; col++) {
-      const color = randomColor();
-      fieldData[row][col] = color;
+      const state = Math.round(Math.random()); // 0 oder 1
+      fieldData[row][col] = state;
 
       const cell = document.createElement("div");
       cell.className = "cell inactive";
-      cell.style.backgroundColor = color;
+
+      const inner = document.createElement("div");
+      inner.className = "cell-inner";
+
+      const front = document.createElement("div");
+      front.className = "front";
+
+      const back = document.createElement("div");
+      back.className = "back";
+
+      if (state === 1) cell.classList.add("flipped");
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      cell.appendChild(inner);
       container.appendChild(cell);
     }
   }
 }
 
 function createPlayField(container, fieldData, referenceField) {
-    container.style.gridTemplateColumns = `repeat(${SIZE}, 50px)`;
   container.innerHTML = "";
+  container.style.gridTemplateColumns = `repeat(${SIZE}, 50px)`;
+
   for (let row = 0; row < SIZE; row++) {
     fieldData[row] = [];
     for (let col = 0; col < SIZE; col++) {
-      const color = referenceField[row][col]; // Start gleich wie Ziel
-      fieldData[row][col] = color;
+      const state = referenceField[row][col]; // 0 oder 1
+      fieldData[row][col] = state;
 
       const cell = document.createElement("div");
       cell.className = "cell";
-      cell.style.backgroundColor = color;
+      if (state === 1) cell.classList.add("flipped");
+
+      const inner = document.createElement("div");
+      inner.className = "cell-inner";
+
+      const front = document.createElement("div");
+      front.className = "front";
+
+      const back = document.createElement("div");
+      back.className = "back";
+
+      inner.appendChild(front);
+      inner.appendChild(back);
+      cell.appendChild(inner);
+
       cell.dataset.row = row;
       cell.dataset.col = col;
 
@@ -143,47 +173,55 @@ function updatePlayField() {
 }
 
 function turn(row, col){
-      toggleColor(row, col);
-  toggleColor(row - 1, col);
-  toggleColor(row + 1, col);
-  toggleColor(row, col - 1);
-  toggleColor(row, col + 1);
-  toggleColor(row - 1, col - 1);
-  toggleColor(row + 1, col + 1);
-  toggleColor(row + 1, col - 1);
-  toggleColor(row - 1, col + 1);
+  toggleFlip(row, col);
+  toggleFlip(row - 1, col);
+  toggleFlip(row + 1, col);
+  toggleFlip(row, col - 1);
+  toggleFlip(row, col + 1);
+  toggleFlip(row - 1, col - 1);
+  toggleFlip(row + 1, col + 1);
+  toggleFlip(row + 1, col - 1);
+  toggleFlip(row - 1, col + 1);
 }
 
-function toggleColor(row, col) {
+function toggleFlip(row, col) {
   if (row < 0 || col < 0 || row >= SIZE || col >= SIZE) return;
-  const currentColor = playField[row][col];
-  const newIndex = (COLORS.indexOf(currentColor) + 1) % COLORS.length;
-  playField[row][col] = COLORS[newIndex];
+  const index = row * SIZE + col;
+  const cell = playContainer.children[index];
+  cell.classList.toggle("flipped");
+
+  // evtl. Spielzustand anpassen, z. B. 0 = front, 1 = back
+  playField[row][col] = playField[row][col] === 0 ? 1 : 0;
 }
 
 function handleClick(row, col) {
   if (movesLeft <= 0) return;
 
-  toggleColor(row, col);
-  toggleColor(row - 1, col);
-  toggleColor(row + 1, col);
-  toggleColor(row, col - 1);
-  toggleColor(row, col + 1);
-  toggleColor(row - 1, col - 1);
-  toggleColor(row + 1, col + 1);
-  toggleColor(row + 1, col - 1);
-  toggleColor(row - 1, col + 1);
+  toggleFlip(row, col);
+  toggleFlip(row - 1, col);
+  toggleFlip(row + 1, col);
+  toggleFlip(row, col - 1);
+  toggleFlip(row, col + 1);
+  toggleFlip(row - 1, col - 1);
+  toggleFlip(row + 1, col + 1);
+  toggleFlip(row + 1, col - 1);
+  toggleFlip(row - 1, col + 1);
 
   movesLeft--;
   movesDisplay.textContent = `Züge übrig: ${movesLeft}`;
   updatePlayField();
 
   if (checkWin()) {
-  confetti({
-    particleCount: 200,
-    spread: 70,
-    origin: { y: 0.8 }
-  });
+confetti({
+  particleCount: 2000,         // MEHR!
+  spread: 180,                // breiter
+  startVelocity: 50,          // schneller los
+  scalar: 2.5,                // GRÖSSER!
+  gravity: 0.6,               // länger in der Luft
+  origin: { y: 1.1 },
+  colors: ["#BEC37F", "#EDE3DC", "#7C9853", "#D8939F", "#ECCECD"],
+  zIndex: 9999
+});
 
   setTimeout(() => {
     levelManager.levelUp();
@@ -216,30 +254,19 @@ function resetGame() {
   MAX_MOVES = levelManager.getTurns();
   movesLeft = MAX_MOVES;
   movesDisplay.textContent = `Züge übrig: ${movesLeft}`;
+  levelDisplay.textContent = `Level: ${levelManager.getLevel()}`;
 
-    // Animation: Feld ausblenden
   playContainer.classList.add("fade-out");
   targetContainer.classList.add("fade-out");
-
 
   setTimeout(() => {
     createReferenceField(targetContainer, targetField);
     createPlayField(playContainer, playField, targetField);
     scrambleField();
     updatePlayField();
-
-    // Wieder einblenden
     playContainer.classList.remove("fade-out");
     targetContainer.classList.remove("fade-out");
-  }, 300); // Zeit passt zu deiner CSS-Transition
-
-
-
-  createReferenceField(targetContainer, targetField);
-  createPlayField(playContainer, playField, targetField);
-  scrambleField();
-  updatePlayField();
-  levelDisplay.textContent = `Level: ${levelManager.getLevel()}`;
+  }, 300);
 }
 
 resetBtn.addEventListener("click", resetGame);

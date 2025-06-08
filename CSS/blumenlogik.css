@@ -8,8 +8,9 @@ body {
 
 .field-container {
   display: flex;
-  justify-content: center;
-  gap: 4rem;
+  flex-direction: column; /* ⬅️ untereinander */
+  align-items: center;
+  gap: 2rem; /* Abstand zwischen den Feldern */
   margin: 2rem 0;
 }
 
@@ -28,10 +29,38 @@ body {
 .cell {
   width: 50px;
   height: 50px;
+  perspective: 600px;
+  position: relative;
+}
+
+.cell-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.cell.flipped .cell-inner {
+  transform: rotateY(180deg);
+}
+
+.cell .front, .cell .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background-size: cover;
   border-radius: 50%;
-  background-color: var(--sage);
-  cursor: pointer;
-  transition: background-color 0.2s;
+}
+
+.cell .front {
+  background-image: url("../img/blume1.png");
+}
+
+.cell .back {
+  background-image: url("../img/blume2.png");
+  transform: rotateY(180deg);
 }
 
 .cell.inactive {
@@ -82,3 +111,4 @@ button:hover, #back-btn:hover {
   opacity: 1;
   pointer-events: all;
 }
+
