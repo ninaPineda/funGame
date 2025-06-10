@@ -213,12 +213,12 @@ function handleClick(row, col) {
 
   if (checkWin()) {
 confetti({
-  particleCount: 2000,         // MEHR!
-  spread: 180,                // breiter
+  particleCount: 1000,         // MEHR!
+  spread: 110,                // breiter
   startVelocity: 50,          // schneller los
-  scalar: 2.5,                // GRÖSSER!
+  scalar: 1.5,                // GRÖSSER!
   gravity: 0.6,               // länger in der Luft
-  origin: { y: 1.1 },
+  origin: { y: 1.3 },
   colors: ["#BEC37F", "#EDE3DC", "#7C9853", "#D8939F", "#ECCECD"],
   zIndex: 9999
 });

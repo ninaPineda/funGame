@@ -55,11 +55,11 @@ body {
 }
 
 .cell .front {
-  background-image: url("../img/blume1.png");
+  background-image: url("../img/1.png");
 }
 
 .cell .back {
-  background-image: url("../img/blume2.png");
+  background-image: url("../img/2.png");
   transform: rotateY(180deg);
 }
 
